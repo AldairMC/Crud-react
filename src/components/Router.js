@@ -5,9 +5,29 @@ import axios from 'axios';
 //components
 import Nav from './Nav/Nav';
 import Header from './Header';
+import Posts from './Posts';
 
 
 class Router extends Component {
+
+    state = {
+        posts: []
+    }
+
+    componentDidMount(){
+        this.getPost()
+    }
+
+    getPost = () => {
+        axios.get(`https://jsonplaceholder.typicode.com/posts`)
+            .then(res => {
+                this.setState({
+                    posts: res.data
+                })
+            })
+    }
+
+
     render() {
         return (
             <div>
@@ -17,8 +37,15 @@ class Router extends Component {
                     <Nav />
 
                     <Switch>
-                        <Route exact path="/" component={}/>
-                        <Route exact path="/" component={}/>
+                        <Route exact path="/" render={ () => {
+                            return (
+                                <Posts 
+                                    posts={this.state.posts}
+                                />   
+                            )
+                        }
+                            }
+                        />
                     </Switch>    
                 </Ruta> 
             </div>
