@@ -11,7 +11,8 @@ class List extends Component {
         return (
             <React.Fragment>
                 {Object.keys(post).map(post => (
-                    <Post 
+                    <Post
+                        deletePost={this.props.deletePost}  
                         key={post}
                         allPost={this.props.infoPosts[post]}
                     />
@@ -23,18 +24,20 @@ class List extends Component {
 
     render() {
         return (
-            <table className="table">
-                <thead>
-                    <tr>
-                        <th scope="col">ID</th>
-                        <th scope="col">Title</th>
-                        <th scope="col">Accion</th>
-                    </tr>    
-                </thead>
-                <tbody>
-                    {this.viewPost()}
-                </tbody>        
-            </table>
+            <div className="container"> 
+                <table className="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">ID</th>
+                            <th scope="col">Title</th>
+                            <th scope="col">Accion</th>
+                        </tr>    
+                    </thead>
+                    <tbody>
+                        {this.viewPost()}
+                    </tbody>        
+                </table>
+            </div>
         );
     }
 }

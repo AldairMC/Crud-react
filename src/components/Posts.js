@@ -6,7 +6,8 @@ class Posts extends Component {
         return (
             <div className="col-md-12 text-center">
                 <h1>Posts</h1>
-                <List 
+                <List
+                    deletePost={this.props.deletePost} 
                     infoPosts={this.props.posts}
                 />
             </div>
