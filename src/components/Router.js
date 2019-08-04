@@ -7,6 +7,8 @@ import Nav from './Nav/Nav';
 import Header from './Header';
 import Posts from './Posts';
 import SinglePost from './SinglePost';
+import NewPost from './NewPost';
+import Error from './Error';
 
 
 class Router extends Component {
@@ -35,7 +37,7 @@ class Router extends Component {
                 if(res.status === 200){
                     const copy = [...this.state.posts]
                     let result = copy.filter( key => (
-                        key.id != id
+                        key.id !== id
                     ))
                     this.setState({
                         posts: result
@@ -44,8 +46,19 @@ class Router extends Component {
             })
     }
 
+    dataNewPost = (dpost) => {
+        axios.post(`https://jsonplaceholder.typicode.com/posts`, {dpost})
+            .then(res => {
+                if(res.status === 201){
+                    let postId = {id: res.data.id}
+                    const newPost = Object.assign({}, res.data.dpost, postId)
 
-
+                    this.setState(prevState => ({
+                        posts: [...prevState.posts, newPost]
+                    }) )
+                }
+            })
+    }
 
     render() {
         return (
@@ -81,8 +94,14 @@ class Router extends Component {
                                 />
                             )
                         }} 
-
                         />
+                        <Route exact path="/new" render={() => {
+                            return (
+                                <NewPost 
+                                    dataNewPost={this.dataNewPost}
+                            />)
+                        }} />
+                        <Route exact component={Error} />
                     </Switch>    
                 </Ruta> 
             </div>

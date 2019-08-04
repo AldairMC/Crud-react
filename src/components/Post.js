@@ -12,11 +12,15 @@ class Post extends Component {
                 <td>{id}</td>
                 <td>{title}</td>
                 <td>
-                    <Link to={`/post/${id}`} className="btn btn-primary"> Ir </Link>
+                    <Link to={`/post/${id}`} className="btn btn-primary "> Ir </Link>
                     <button 
                         className="btn btn-danger"
                         onClick={ () => {this.props.deletePost(id)}}> Delete   
                     </button>
+                    <button 
+                        className="btn btn-warning"
+                        > Edit
+                    </button>                   
                 </td>
             </tr>
         );
